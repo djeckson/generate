@@ -44,7 +44,7 @@ func (g *Generator) CreateTypes() (err error) {
 			return err
 		}
 		// ugh: if it was anything but a struct the type will not be the name...
-		if rootType != "*"+name {
+		if rootType != name {
 			a := Field{
 				Name:        name,
 				JSONName:    "",
@@ -181,7 +181,7 @@ func (g *Generator) processObject(name string, schema *Schema) (typ string, err 
 		Fields:      make(map[string]Field, len(schema.Properties)),
 	}
 	// cache the object name in case any sub-schemas recursively reference it
-	schema.GeneratedType = "*" + name
+	schema.GeneratedType = name
 	// regular properties
 	for propKey, prop := range schema.Properties {
 		fieldName := getGolangName(propKey)
@@ -260,7 +260,7 @@ func (g *Generator) processObject(name string, schema *Schema) (typ string, err 
 	}
 	g.Structs[strct.Name] = strct
 	// objects are always a pointer
-	return getPrimitiveTypeName("object", name, true)
+	return getPrimitiveTypeName("object", name, false)
 }
 
 func contains(s []string, e string) bool {

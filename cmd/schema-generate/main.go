@@ -5,10 +5,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/djeckson/generate"
 	"io"
 	"os"
-
-	"github.com/a-h/generate"
 )
 
 var (
